@@ -1,0 +1,35 @@
+
+
+.sound-item{
+    margin-bottom: 1em;
+   
+}
+
+.sound-item-container{
+    overflow: hidden;
+    border: 1px solid lightgray;
+    border-radius: 1em;
+}
+
+.sound-item-container .sound-img{
+    width: 100%;
+}
+
+.sound-item .title{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.sound-item .icon{
+    text-align: center;
+    font-size: 40px;
+    padding: 13px;
+}
+
+.sound-item-detail{
+    padding: 1em;
+}
+
+.sound-item-detail .date, .sound-item-detail .location{
+    font-size: 14px;
+}

@@ -1,0 +1,27 @@
+
+
+.schedule-field{
+    padding-top: 1em;
+}
+
+.schedule-item, .schedule-item-comming{
+    padding: 1em;
+    margin-bottom: 1em;
+    border-radius: 1em;
+}
+
+.schedule-item{
+    background-color: rgb(230, 230, 230);
+}
+
+.schedule-item-comming{
+    background-color: #FFE08D;
+}
+
+.schedule-item .title, .schedule-item-comming .title{
+    font-weight: bold;
+}
+
+.schedule-item .date, .schedule-item-comming .date{
+    font-size: 14px;
+}

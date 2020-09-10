@@ -1,0 +1,17 @@
+.nav-link{
+    margin-right: 1em;
+    text-align: center;
+}
+
+.navbar-brand{
+    padding-left: 1em;
+}
+
+.navbar-brand img{
+    width: 45px;
+    height: 60px;
+}
+
+.nav-link:hover{
+    background-color: rgba(0, 0, 0, 0.05)
+}
