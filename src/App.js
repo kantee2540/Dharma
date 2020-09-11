@@ -7,6 +7,7 @@ import Footer from './Component/Footer'
 import Home from './Home/Home'
 import Schedule from './Schedule/Schedule'
 import Sound from './Sound/Sound'
+import Video from './Video/Video'
 
 function App() {
   return (
@@ -22,6 +23,9 @@ function App() {
         </Route>
         <Route path="/sound">
           <Sound/>
+        </Route>
+        <Route path="/video">
+          <Video/>
         </Route>
       </Switch>
       <Footer/>

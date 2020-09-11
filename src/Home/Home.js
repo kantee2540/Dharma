@@ -36,14 +36,14 @@ class SoundItem extends React.Component{
     render(){
         return(
             <Col className="sound-item" xs={12} md={6} lg={4}>
-                <div className="sound-item-container">
+                <Link className="sound-item-container">
                     <img className="sound-img" src={tawanron}/>
                     <div className="sound-item-detail">
                         <div className="title">ปฏิบัติธรรม</div>
                         <div className="date">20 ก.ค.63 - 25 ก.ค.63</div>
                         <div className="location">ตะวันลอนศูนย์ฝึกอบรมไทยพาณิชย์</div>
                     </div>
-                </div>
+                </Link>
             </Col>
         )
     }

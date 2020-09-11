@@ -2,13 +2,20 @@
 
 .sound-item{
     margin-bottom: 1em;
-   
 }
 
 .sound-item-container{
+    display: block;
     overflow: hidden;
     border: 1px solid lightgray;
     border-radius: 1em;
+    color: black;
+}
+
+.sound-item-container:hover{
+    color: black;
+    text-decoration: none;
+    background-color: rgb(238, 238, 238);
 }
 
 .sound-item-container .sound-img{
