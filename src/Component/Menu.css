@@ -1,6 +1,7 @@
 .nav-link{
     margin-right: 1em;
     text-align: center;
+    border-radius: 0.5em;
 }
 
 .navbar-brand{
@@ -12,6 +13,6 @@
     height: 60px;
 }
 
-.nav-link:hover{
+.nav-link:hover, .navbar .active{
     background-color: rgba(0, 0, 0, 0.05)
 }

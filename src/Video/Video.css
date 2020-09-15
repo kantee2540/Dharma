@@ -1,0 +1,22 @@
+.video-content{
+    text-align: center;
+}
+
+.video-image img{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
+
+.video-image{
+    margin-bottom: 1em;
+}
+
+.channel-title{
+    font-size: 35px;
+    font-weight: bold;
+}
+
+.channel-description{
+    margin-bottom: 1em;
+}

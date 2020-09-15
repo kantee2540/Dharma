@@ -1,0 +1,36 @@
+.head-title .back-link{
+    padding: 10px;
+    color: black;
+    border-radius: 10px;
+    margin-right: 1em;
+}
+
+.head-title .back-link:hover{
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.sound-item{
+    cursor: pointer;
+}
+
+.sound-file-body .active{
+    background-color: dodgerblue;
+    color: white;
+}
+
+.play-info{
+    margin-bottom: 1em;
+}
+
+.play-title{
+    font-weight: bold;
+}
+
+.no-item-selected{
+    padding: 2em 0px;
+}
+
+.no-item-selected .title{
+    font-size: 25px;
+    font-weight: bold;
+}

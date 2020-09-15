@@ -9,7 +9,7 @@ export default function Cover() {
     return (
         <div className="cover-image" style={{backgroundImage: `url(${tawanron})`}}>
             <Container>
-            <Row>
+            {/* <Row>
               <Col md={6} lg={7} xl={7}></Col>
               <Col xs={12} md={6} lg={5}>
                 <div className="schedule-block">
@@ -30,7 +30,7 @@ export default function Cover() {
                   </div>
                 </div>
               </Col>
-            </Row>
+            </Row> */}
             </Container>
           </div>
     )

@@ -13,7 +13,7 @@ export default function menu() {
                 <Navbar.Collapse style={{justifyContent: "center"}}>
                     <Nav>
                     <NavLink to="/" activeClassName="active" exact className="nav-link">หน้าแรก</NavLink>
-                    <NavLink to="/schedule" activeClassName="active" className="nav-link">ตารางกำหนดการ</NavLink>
+                    {/* <NavLink to="/schedule" activeClassName="active" className="nav-link">ตารางกำหนดการ</NavLink> */}
                     <NavLink to="/sound" activeClassName="active" className="nav-link">ฟังเสียง</NavLink>
                     <NavLink to="/video" activeClassName="active" className="nav-link">ชมภาพ</NavLink>
                     <NavLink to="/about" activeClassName="active" className="nav-link">เกี่ยวกับเรา</NavLink>

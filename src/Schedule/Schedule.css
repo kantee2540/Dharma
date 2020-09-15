@@ -7,6 +7,8 @@
 .schedule-item, .schedule-item-comming{
     padding: 1em;
     margin-bottom: 1em;
+    margin-left: 1em;
+    margin-right: 1em;
     border-radius: 1em;
 }
 
