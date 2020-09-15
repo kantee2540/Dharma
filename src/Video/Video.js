@@ -16,7 +16,8 @@ export default function Video() {
                     <div className="channel-title">พระไตรปิฎกใกล้ตัว</div>
                     <div className="channel-description">ศึกษาพระไตรปิฎกกับอาจารย์ดิษกฤต สาสนเวชช์<br/>ดูวิดีโอเพิ่มเติมได้ที่ช่องนี้</div>
                     <a href="https://www.youtube.com/c/%E0%B8%9E%E0%B8%A3%E0%B8%B0%E0%B9%84%E0%B8%95%E0%B8%A3%E0%B8%9B%E0%B8%B4%E0%B8%8E%E0%B8%81%E0%B9%83%E0%B8%81%E0%B8%A5%E0%B9%89%E0%B8%95%E0%B8%B1%E0%B8%A7/featured"
-                    className="btn btn-warning">
+                    className="btn btn-warning"
+                    target="_blank">
                         ไปที่ Youtube
                     </a>
                 </div>

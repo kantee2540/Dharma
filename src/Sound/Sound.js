@@ -4,6 +4,7 @@ import { Link, BrowserRouter, Switch ,Route } from 'react-router-dom'
 import axios from 'axios'
 import './Sound.css'
 import { baseUrl, resourceUrl } from '../networkVariable'
+import Overlay from '../Component/Overlay'
 
 import SoundFile from './SoundFile'
 
@@ -30,7 +31,7 @@ export default class Sound extends React.Component {
         .then(response => {
             this.setState({items: response.data, isLoaded: true});
         }).catch(error => {
-            this.setState({error: error});
+            this.setState({error: error.message});
         });
     }
 
@@ -41,6 +42,7 @@ export default class Sound extends React.Component {
                 <div className="content">
                 <Switch>
                     <Route path="/" exact>
+                        {!isLoaded ? <Overlay message={error == null ? "กำลังโหลด": error}/>: ''}
                         <BaseSound items={items}/>
                     </Route>
                     <Route path="/:id">

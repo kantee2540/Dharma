@@ -6,12 +6,15 @@ import { Link, withRouter } from 'react-router-dom'
 import { baseUrl, resourceUrl } from '../networkVariable'
 import './Sound.css'
 import axios from 'axios'
+import Overlay from '../Component/Overlay'
 
 class SoundFile extends React.Component{
 
     constructor(props){
         super(props);
-        this.state = {packages: {title: "", folder: ""}, soundFile: {items: [], error: null}, currentPlay: {title: "", date: "", key: null}};
+        this.state = {packages: {title: "", folder: "", error: null},
+        soundFile: {items: [], isLoaded: false, error: null},
+        currentPlay: {title: "", date: "", key: null}};
     }
 
     getInfomation(){
@@ -27,7 +30,7 @@ class SoundFile extends React.Component{
             var info = response.data[0];
             this.setState({packages: {title: info.sound_package_name, folder: info.sound_package_folder}});
         }).catch(error => {
-            console.log(error);
+            this.setState({packages: {error: error.message}});
         });
     }
 
@@ -42,9 +45,9 @@ class SoundFile extends React.Component{
         })
         .then(response => {
             var datas = response.data;
-            this.setState({soundFile: {items: datas}});
+            this.setState({soundFile: {items: datas, isLoaded: true}});
         }).catch(error => {
-            this.setState({soundFile: {error: error}});
+            this.setState({soundFile: {error: error.message}});
         });
     }
 
@@ -61,6 +64,7 @@ class SoundFile extends React.Component{
         const { packages, soundFile, currentPlay } = this.state;
         return(
             <div>
+                {!soundFile.isLoaded ? <Overlay message={soundFile.error === null ? 'กำลังโหลด': soundFile.error}/>: ''}
                 <Container>
                     <div className="head-title">
                         <Link to="/" className="back-link">
