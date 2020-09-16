@@ -8,6 +8,7 @@ import Home from './Home/Home'
 import Schedule from './Schedule/Schedule'
 import Sound from './Sound/Sound'
 import Video from './Video/Video'
+import About from './About/About'
 
 function App() {
   return (
@@ -26,6 +27,9 @@ function App() {
         </Route>
         <Route path="/video">
           <Video/>
+        </Route>
+        <Route path="/about">
+          <About/>
         </Route>
       </Switch>
       <Footer/>

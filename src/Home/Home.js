@@ -1,12 +1,13 @@
 import React from 'react'
 import Cover from '../Component/Cover'
-import { Container, Row, Col } from 'react-bootstrap'
+import { Container, Row, Col, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { baseUrl, resourceUrl } from '../networkVariable'
 import './Home.css'
 import axios from 'axios'
 
 import tawanron from '../Image/tawanron.jpg'
+import youtube_channel from '../Image/youtube_channel.jpg'
 
 export default class Home extends React.Component {
 
@@ -48,6 +49,20 @@ export default class Home extends React.Component {
                             title={item.sound_package_name}/>
                         )}
                     </Row>
+                    <div className="about">
+                        <div className="head-title">เกี่ยวกับเรา</div>
+                        <Row>
+                            <Col md={3} style={{textAlign: "center"}}>
+                                <img className="img" src={youtube_channel}/>
+                            </Col>
+                            <Col md={9} style={{paddingTop: 20}}>
+                                <div className="title">เกี่ยวกับเรา</div>
+                                <div className="description">ศึกษาพระไตรปิฎกกับอาจารย์ดิษกฤต สาสนเวชช์</div>
+                                <Link to="about" className="btn btn-warning">ดูเพิ่มเติม</Link>
+                            </Col>
+                        </Row>
+                        
+                    </div>
                 </Container>
             </div>
         )
