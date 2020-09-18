@@ -49,6 +49,7 @@
 }
 
 .about .title{
+    margin-top: 1em;
     font-size: 23px;
     font-weight: bold;
 }

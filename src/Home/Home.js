@@ -55,7 +55,7 @@ export default class Home extends React.Component {
                             <Col md={3} style={{textAlign: "center"}}>
                                 <img className="img" src={youtube_channel}/>
                             </Col>
-                            <Col md={9} style={{paddingTop: 20}}>
+                            <Col md={9} style={{paddingTop: 10}}>
                                 <div className="title">เกี่ยวกับเรา</div>
                                 <div className="description">ศึกษาพระไตรปิฎกกับอาจารย์ดิษกฤต สาสนเวชช์</div>
                                 <Link to="about" className="btn btn-warning">ดูเพิ่มเติม</Link>
