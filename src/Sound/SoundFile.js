@@ -108,7 +108,7 @@ class SoundFile extends React.Component{
                                 loop={false}
                                 src={resourceUrl+ "/"+ packages.folder +"/"+currentPlay.title}/>
                                 <div className="download-detail">
-                                    <a className="btn btn-primary" href={resourceUrl+ "/"+ packages.folder +"/"+currentPlay.title} download>ดาวโหลด</a>
+                                    <a className="btn btn-primary" href={resourceUrl+ "/"+ packages.folder +"/"+currentPlay.title} target="_blank" download>ดาวโหลด</a>
                                 </div>
                             </>
                                 : <NoItemSelect/>}
