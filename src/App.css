@@ -4,13 +4,13 @@
     font-weight: bold;
 }
 
-.head-title a{
+.compact-button{
     font-size: 18px;
     padding: 0.5em;
     border-radius: 0.5em;
 }
 
-.head-title a:hover{
+.compact-button:hover{
     text-decoration: none;
     background-color: rgb(213, 234, 255);
 }

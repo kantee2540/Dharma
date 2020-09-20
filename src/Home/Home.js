@@ -44,7 +44,7 @@ export default class Home extends React.Component {
                 <Container style={{ marginTop: 20}}>
                     <div className="head-title d-flex justify-content-between">
                         <div>ฟังย้อนหลัง</div>
-                        <Link to="/sound">เพิ่มเติม <i class="fas fa-arrow-right"></i></Link>
+                        <Link to="/sound" className="compact-button">เพิ่มเติม <i class="fas fa-arrow-right"></i></Link>
                     </div>
                     <Row>
                         {items.map((item, key) => 

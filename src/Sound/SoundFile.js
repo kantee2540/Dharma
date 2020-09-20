@@ -7,6 +7,7 @@ import { baseUrl, resourceUrl } from '../networkVariable'
 import './Sound.css'
 import axios from 'axios'
 import Overlay from '../Component/Overlay'
+import BottomOverlay from '../Component/BottomOverlay'
 
 class SoundFile extends React.Component{
 
@@ -14,7 +15,8 @@ class SoundFile extends React.Component{
         super(props);
         this.state = {packages: {title: "", folder: "", error: null},
         soundFile: {items: [], isLoaded: false, error: null},
-        currentPlay: {title: "", date: "", key: null}};
+        currentPlay: {title: "", date: "", key: null},
+        overlayShow: false};
     }
 
     getInfomation(){
@@ -64,10 +66,29 @@ class SoundFile extends React.Component{
         this.setState({currentPlay: {title: fileName, date: uploadDate, key: key}});
     }
 
+    copyLink(event){
+        let currentURL = window.location.href;
+        var dummy = document.createElement('input');
+        document.body.appendChild(dummy);
+        dummy.value = currentURL;
+        dummy.select();
+        document.execCommand("copy");
+        document.body.removeChild(dummy);
+
+        this.setState({overlayShow: true});
+        setTimeout(()=>{
+            this.setState({overlayShow: false});
+        }, 1500);
+        console.log(currentURL);
+
+        event.preventDefault();
+    }
+
     render(){
-        const { packages, soundFile, currentPlay } = this.state;
+        const { packages, soundFile, currentPlay, overlayShow } = this.state;
         return(
             <div>
+                <BottomOverlay message="คัดลอกลิ้งก์แล้ว" show={overlayShow}/>
                 {!soundFile.isLoaded ? <Overlay message={soundFile.error === null ? 'กำลังโหลด': soundFile.error}/>: ''}
                 <Container>
                     <div className="head-title">
@@ -96,7 +117,13 @@ class SoundFile extends React.Component{
                             </div>
                             
                                 <div className="download-detail">
-                                    <a className="btn btn-primary" href={resourceUrl+ "/"+ packages.folder +"/"+currentPlay.title} target="_blank" download>ดาวโหลด</a>
+                                    <a className="compact-button" 
+                                    href={resourceUrl+ "/"+ packages.folder +"/"+currentPlay.title} target="_blank" download>
+                                        <i className="fas fa-file-download"></i>ดาวโหลด 
+                                    </a>
+                                    <a className="compact-button" href="#" onClick={this.copyLink.bind(this)}>
+                                        <i className="fas fa-copy"></i>คัดลอกลิ้งก์ 
+                                    </a>
                                 </div>
                             </>
                                 : <NoItemSelect/>}

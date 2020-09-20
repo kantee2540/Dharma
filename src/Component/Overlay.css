@@ -16,3 +16,19 @@
     padding: 20px 50px;
     transform: translate(-50%,-50%);
 }
+
+.overlay-bottom{
+    transition:  all 0.3s;
+}
+
+.overlay-content-bottom{
+    position: fixed;
+    font-size: 20px;
+    background-color: rgba(238, 238, 238, 0.7);
+    border-radius: 1em;
+    left: 50%;
+    bottom: 2em;
+    padding: 20px 50px;
+    transform: translateX(-50%);
+    z-index: 2;
+}

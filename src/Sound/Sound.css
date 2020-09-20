@@ -44,4 +44,23 @@
 
 .download-detail{
     margin-top: 1em;
+    margin-bottom: 2em;
+}
+
+.download-detail .fas{
+    margin-right: 0.5em;
+}
+
+.download-detail .compact-button{
+    font-size: 18px;
+    padding: 1em;
+    border-radius: 0.5em;
+    color: black;
+    margin-right: 1em;
+    color: dodgerblue;
+}
+
+.download-detail .compact-button:hover{
+    text-decoration: none;
+    background-color: rgb(213, 234, 255);
 }
