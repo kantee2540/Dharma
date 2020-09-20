@@ -39,10 +39,10 @@ export default class Sound extends React.Component {
         const { items, error, isLoaded } = this.state;
         return (
             <BrowserRouter basename="/sound">
+                {!isLoaded ? <Overlay message={error == null ? "กำลังโหลด": error}/>: ''}
                 <div className="content">
                 <Switch>
                     <Route path="/" exact>
-                        {!isLoaded ? <Overlay message={error == null ? "กำลังโหลด": error}/>: ''}
                         <BaseSound items={items}/>
                     </Route>
                     <Route path="/:id">

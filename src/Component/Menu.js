@@ -8,7 +8,7 @@ export default function menu() {
     return (
         <div>
             <Navbar collapseOnSelect expand="md" bg="light" fixed="top">
-                <Link to="/" className="navbar-brand"><img src={logo}/></Link>
+                <Link to="/" className="navbar-brand"><img src={logo} alt="ปฏิบัติธรรม"/></Link>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse style={{justifyContent: "center"}}>
                     <Nav>

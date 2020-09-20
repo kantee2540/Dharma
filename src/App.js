@@ -10,32 +10,33 @@ import Sound from './Sound/Sound'
 import Video from './Video/Video'
 import About from './About/About'
 
-function App() {
-  return (
-    <BrowserRouter>
-    <div className="App">
-      <Menu/>
-      <Switch>
-        <Route path="/" exact>
-          <Home/>
-        </Route>
-        <Route path="/schedule">
-          <Schedule/>
-        </Route>
-        <Route path="/sound">
-          <Sound/>
-        </Route>
-        <Route path="/video">
-          <Video/>
-        </Route>
-        <Route path="/about">
-          <About/>
-        </Route>
-      </Switch>
-      <Footer/>
-    </div>
-    </BrowserRouter>
-  );
-}
+export default class App extends React.Component {
 
-export default App;
+  render(){
+    return (
+      <BrowserRouter>
+      <div className="App">
+        <Menu/>
+        <Switch>
+          <Route path="/" exact>
+            <Home/>
+          </Route>
+          <Route path="/schedule">
+            <Schedule/>
+          </Route>
+          <Route path="/sound">
+            <Sound/>
+          </Route>
+          <Route path="/video">
+            <Video/>
+          </Route>
+          <Route path="/about">
+            <About/>
+          </Route>
+        </Switch>
+        <Footer/>
+      </div>
+      </BrowserRouter>
+    );
+  }
+}

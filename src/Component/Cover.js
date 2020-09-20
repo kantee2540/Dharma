@@ -1,6 +1,6 @@
 import React from 'react'
-import { Container, Row, Col } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import { Container } from 'react-bootstrap'
+// import { Link } from 'react-router-dom'
 import tawanron from '../Image/tawanron.jpg'
 
 import './Cover.css'

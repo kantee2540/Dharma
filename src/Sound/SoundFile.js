@@ -28,7 +28,10 @@ class SoundFile extends React.Component{
         })
         .then(response => {
             var info = response.data[0];
-            this.setState({packages: {title: info.sound_package_name, folder: info.sound_package_folder}});
+            this.setState({packages: 
+                {title: info.sound_package_name,
+                image: info.package_image,
+                folder: info.sound_package_folder}});
         }).catch(error => {
             this.setState({packages: {error: error.message}});
         });
@@ -57,6 +60,7 @@ class SoundFile extends React.Component{
     }
 
     selectSound(fileName, uploadDate, key){
+        window.scrollTo(0, 0);
         this.setState({currentPlay: {title: fileName, date: uploadDate, key: key}});
     }
 
@@ -73,6 +77,30 @@ class SoundFile extends React.Component{
                         {packages.title}
                     </div>
                     <Row>
+                        <Col md={6}>
+                            {currentPlay.title !== "" ? 
+                            <>
+                            <img src={resourceUrl+ "/"+ packages.folder +"/"+packages.image} alt="coverimage" className="cover-image-package"/>
+                            <AudioPlayer 
+                                autoPlay={true}
+                                showJumpControls={false}
+                                loop={false}
+                                src={resourceUrl+ "/"+ packages.folder +"/"+currentPlay.title}/>
+                            <div className="play-info">
+                                <div className="play-title">
+                                {currentPlay.title}
+                                </div>
+                                <div className="upload-date">
+                                    {currentPlay.date}
+                                </div>
+                            </div>
+                            
+                                <div className="download-detail">
+                                    <a className="btn btn-primary" href={resourceUrl+ "/"+ packages.folder +"/"+currentPlay.title} target="_blank" download>ดาวโหลด</a>
+                                </div>
+                            </>
+                                : <NoItemSelect/>}
+                        </Col>
                         <Col md={6}>
                             <Table bordered hover>
                             <thead>
@@ -92,27 +120,7 @@ class SoundFile extends React.Component{
                             </tbody>
                             </Table>
                         </Col>
-                        <Col md={6}>
-                            {currentPlay.title != "" ? 
-                            <>
-                            <div className="play-info">
-                                <div className="play-title">
-                                {currentPlay.title}
-                                </div>
-                                <div className="upload-date">
-                                    {currentPlay.date}
-                                </div>
-                            </div>
-                            <AudioPlayer 
-                                showJumpControls={false}
-                                loop={false}
-                                src={resourceUrl+ "/"+ packages.folder +"/"+currentPlay.title}/>
-                                <div className="download-detail">
-                                    <a className="btn btn-primary" href={resourceUrl+ "/"+ packages.folder +"/"+currentPlay.title} target="_blank" download>ดาวโหลด</a>
-                                </div>
-                            </>
-                                : <NoItemSelect/>}
-                        </Col>
+                        
                     </Row>
                     
                 </Container>
@@ -127,7 +135,7 @@ function NoItemSelect(){
     return(
         <div className="no-item-selected">
             <div className="title">โปรดเลือกไฟล์เสียงเพื่อเล่น</div>
-            คลิกเลือกไฟล์เสียงที่ต้องการฟังได้จากรายการด้านข้างซ้าย
+            คลิกเลือกไฟล์เสียงที่ต้องการฟังได้จากรายการ
         </div>
     )
 }
