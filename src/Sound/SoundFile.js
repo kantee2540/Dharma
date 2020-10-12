@@ -118,7 +118,7 @@ class SoundFile extends React.Component{
                             
                                 <div className="download-detail">
                                     <a className="compact-button" 
-                                    href={resourceUrl+ "/"+ packages.folder +"/"+currentPlay.title} target="_blank" download>
+                                    href={baseUrl+ "/sound/"+ packages.folder +"/"+currentPlay.title} target="_blank">
                                         <i className="fas fa-file-download"></i>ดาวโหลด 
                                     </a>
                                     <a className="compact-button" href="#" onClick={this.copyLink.bind(this)}>
