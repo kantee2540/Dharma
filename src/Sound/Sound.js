@@ -23,11 +23,7 @@ export default class Sound extends React.Component {
 
     componentDidMount(){
         var url = baseUrl + "/sound";
-        axios.get(url, {
-            params:{
-                limit: 5
-            }
-        })
+        axios.get(url)
         .then(response => {
             this.setState({items: response.data, isLoaded: true});
         }).catch(error => {

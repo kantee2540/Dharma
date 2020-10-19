@@ -25,7 +25,7 @@ export default class Home extends React.Component {
         var url = baseUrl + "/sound";
         axios.get(url, {
             params:{
-                limit: 3
+                limit: 6
             }
         })
         .then(response => {
