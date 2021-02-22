@@ -1,5 +1,5 @@
 
-const baseUrl = "http://13.250.61.155";
+const baseUrl = "http://54.255.65.119";
 const resourceUrl = baseUrl+"/sound_resource";
 
 export { baseUrl, resourceUrl };
