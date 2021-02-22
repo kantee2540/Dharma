@@ -1,8 +1,11 @@
 import React from 'react';
 import './App.css';
-import { BrowserRouter, Link, Route, Switch } from 'react-router-dom'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import Menu from './Component/Menu'
 import Footer from './Component/Footer'
+import dayjs from 'dayjs'
+import 'dayjs/locale/th'
+import buddhistEra from 'dayjs/plugin/buddhistEra'
 
 import Home from './Home/Home'
 import Schedule from './Schedule/Schedule'
@@ -11,6 +14,11 @@ import Video from './Video/Video'
 import About from './About/About'
 
 export default class App extends React.Component {
+
+  componentDidMount(){
+    dayjs.extend(buddhistEra);
+    dayjs.locale('th');
+  }
 
   render(){
     return (

@@ -5,6 +5,7 @@ import axios from 'axios'
 import './Sound.css'
 import { baseUrl, resourceUrl } from '../networkVariable'
 import Overlay from '../Component/Overlay'
+import dayjs from 'dayjs'
 
 import SoundFile from './SoundFile'
 
@@ -62,7 +63,8 @@ class BaseSound extends React.Component{
                         (
                             <SoundItem key={key} 
                             id={item.id}
-                            img={item.package_image != null ? resourceUrl + "/" + item.sound_package_folder + "/" + item.package_image : tawanron} 
+                            img={item.package_image != null ? resourceUrl + "/" + item.sound_package_folder + "/" + item.package_image : tawanron}
+                            date={item.created_at} 
                             title={item.sound_package_name}/>
                         ))}
                     </Row>
@@ -73,14 +75,23 @@ class BaseSound extends React.Component{
 }
 
 class SoundItem extends React.Component{
+    formatDate(date){
+        let toDate = new Date(date);
+        let formatted = dayjs(toDate).format("DD MMMM BBBB")
+        return formatted
+    }
+
     render(){
         var link = "/"+this.props.id;
         return(
             <Col className="sound-item" xs={12} md={6} lg={4}>
                 <Link className="sound-item-container" to={link}>
-                    <img className="sound-img" src={this.props.img}/>
+                    <img className="sound-img" src={this.props.img} alt="cover"/>
                     <div className="sound-item-detail">
                         <div className="title">{this.props.title}</div>
+                        <div className="date">
+                            <b>วันที่เผยแพร่ :</b> {this.formatDate(this.props.date)}
+                        </div>
                     </div>
                 </Link>
             </Col>

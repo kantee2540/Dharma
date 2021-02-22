@@ -1,11 +1,12 @@
 import React from 'react'
 import Cover from '../Component/Cover'
-import { Container, Row, Col, Button } from 'react-bootstrap'
+import { Container, Row, Col } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { baseUrl, resourceUrl } from '../networkVariable'
 import './Home.css'
 import axios from 'axios'
 import Overlay from '../Component/Overlay'
+import dayjs from 'dayjs'
 
 import tawanron from '../Image/tawanron.jpg'
 import youtube_channel from '../Image/youtube_channel.jpg'
@@ -44,13 +45,14 @@ export default class Home extends React.Component {
                 <Container style={{ marginTop: 20}}>
                     <div className="head-title d-flex justify-content-between">
                         <div>ฟังย้อนหลัง</div>
-                        <Link to="/sound" className="compact-button">เพิ่มเติม <i class="fas fa-arrow-right"></i></Link>
+                        <Link to="/sound" className="compact-button">เพิ่มเติม <i className="fas fa-arrow-right"></i></Link>
                     </div>
                     <Row>
                         {items.map((item, key) => 
                             <SoundItem key={key} 
                             id={item.id}
                             img={item.package_image != null ? resourceUrl + "/" + item.sound_package_folder + "/" + item.package_image : tawanron} 
+                            date={item.created_at}
                             title={item.sound_package_name}/>
                         )}
                     </Row>
@@ -58,7 +60,7 @@ export default class Home extends React.Component {
                         <div className="head-title">เกี่ยวกับเรา</div>
                         <Row>
                             <Col md={3} style={{textAlign: "center"}}>
-                                <img className="img" src={youtube_channel}/>
+                                <img className="img" src={youtube_channel} alt="youtube"/>
                             </Col>
                             <Col md={9} style={{paddingTop: 10}}>
                                 <div className="title">เกี่ยวกับเรา</div>
@@ -75,14 +77,24 @@ export default class Home extends React.Component {
 }
 
 class SoundItem extends React.Component{
+    formatDate(date){
+        let toDate = new Date(date);
+        let formatted = dayjs(toDate).format("DD MMMM BBBB")
+        return formatted
+    }
+
     render(){
         var link = "/sound/"+this.props.id;
+        console.log(this.props.date)
         return(
             <Col className="sound-item" xs={12} md={6} lg={4}>
                 <Link className="sound-item-container" to={link}>
-                    <img className="sound-img" src={this.props.img}/>
+                    <img className="sound-img" src={this.props.img} alt="sound item"/>
                     <div className="sound-item-detail">
                         <div className="title">{this.props.title}</div>
+                        <div className="date">
+                            <b>วันที่เผยแพร่ :</b> {this.formatDate(this.props.date)}
+                        </div>
                     </div>
                 </Link>
             </Col>

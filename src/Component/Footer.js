@@ -6,7 +6,7 @@ export default function Footer() {
     return (
         <Container className="footer">
             <hr/>
-            สงวนลิขสิทธิ์ 2563<br/>
+            สงวนลิขสิทธิ์ 2564<br/>
             ปฏิบัติธรรมตามพระไตรปิฏก
         </Container>
     )
