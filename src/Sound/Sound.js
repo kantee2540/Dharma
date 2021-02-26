@@ -18,28 +18,31 @@ export default class Sound extends React.Component {
         this.state = {
             items: [],
             error: null,
-            isLoaded: false
+            isLoading: false
         }
     }
 
     componentDidMount(){
+        this.setState({isLoading: true})
         var url = baseUrl + "/sound";
         axios.get(url)
         .then(response => {
-            this.setState({items: response.data, isLoaded: true});
+            this.setState({items: response.data, isLoading: false});
         }).catch(error => {
-            this.setState({error: error.message});
+            this.setState({error: error.message, isLoading: false});
         });
     }
 
     render(){
-        const { items, error, isLoaded } = this.state;
+        const { items, error, isLoading } = this.state;
         return (
             <BrowserRouter basename="/sound">
                 <div className="content">
                 <Switch>
                     <Route path="/" exact>
-                        {!isLoaded ? <Overlay message={error == null ? "กำลังโหลด": error}/>: ''}
+                        {isLoading || error !== null ?
+                         <Overlay isLoading={isLoading} message={error == null ? "กำลังโหลด": error}/>
+                         : ''}
                         <BaseSound items={items}/>
                     </Route>
                     <Route path="/:id">

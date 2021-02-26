@@ -18,11 +18,12 @@ export default class Home extends React.Component {
         this.state = {
             items: [],
             error: null,
-            isLoaded: false
+            isLoading: false
         }
     }
 
     componentDidMount(){
+        this.setState({isLoading: true})
         var url = baseUrl + "/sound";
         axios.get(url, {
             params:{
@@ -30,17 +31,19 @@ export default class Home extends React.Component {
             }
         })
         .then(response => {
-            this.setState({items: response.data, isLoaded: true});
+            this.setState({items: response.data, isLoading: false});
         }).catch(error => {
-            this.setState({error: error.message});
+            this.setState({error: error.message, isLoading: false});
         });
     }
 
     render(){
-        const { items, error, isLoaded } = this.state
+        const { items, error, isLoading } = this.state
         return (
             <div>
-                {!isLoaded ? <Overlay message={error == null ? "กำลังโหลด": error}/>: ''}
+                {isLoading || error !== null  ? 
+                <Overlay isLoading={isLoading} message={error == null ? "กำลังโหลด": error}/>
+                : ''}
                 <Cover/>
                 <Container style={{ marginTop: 20}}>
                     <div className="head-title d-flex justify-content-between">

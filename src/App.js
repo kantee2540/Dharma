@@ -24,27 +24,37 @@ export default class App extends React.Component {
     return (
       <BrowserRouter>
       <div className="App">
-        <Menu/>
-        <Switch>
-          <Route path="/" exact>
-            <Home/>
-          </Route>
-          <Route path="/schedule">
-            <Schedule/>
-          </Route>
-          <Route path="/sound">
-            <Sound/>
-          </Route>
-          <Route path="/video">
-            <Video/>
-          </Route>
-          <Route path="/about">
-            <About/>
-          </Route>
-        </Switch>
-        <Footer/>
+        <UserStack/>
       </div>
       </BrowserRouter>
     );
   }
+}
+
+function UserStack(){
+  return(
+    <>
+    <BrowserRouter basename="/">
+    <Menu/>
+    <Switch>
+      <Route path="/" exact>
+        <Home/>
+      </Route>
+      <Route path="/schedule">
+        <Schedule/>
+      </Route>
+      <Route path="/sound">
+        <Sound/>
+      </Route>
+      <Route path="/video">
+        <Video/>
+      </Route>
+      <Route path="/about">
+        <About/>
+      </Route>
+    </Switch>
+    <Footer/>
+    </BrowserRouter>
+    </>
+  )
 }

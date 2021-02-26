@@ -14,12 +14,14 @@ class SoundFile extends React.Component{
     constructor(props){
         super(props);
         this.state = {packages: {title: "", folder: "", error: null},
-        soundFile: {items: [], isLoaded: false, error: null},
+        soundFile: {items: [], error: null},
         currentPlay: {title: "", date: "", key: null},
-        overlayShow: false};
+        overlayShow: false,
+        isLoading: false};
     }
 
     getInfomation(){
+        this.setState({isLoading: true})
         const id = this.props.match.params.id;
         var url = baseUrl + "/sound/"+id;
         
@@ -34,10 +36,11 @@ class SoundFile extends React.Component{
                 }
             });
             this.setState({
-                soundFile: {items: info.data, isLoaded: true}
+                soundFile: {items: info.data}
             })
+            this.setState({isLoading: false})
         }).catch(error => {
-            this.setState({packages: {error: error.message}});
+            this.setState({packages: {error: error.message}, isLoading: false});
         });
     }
 
@@ -69,11 +72,11 @@ class SoundFile extends React.Component{
     }
 
     render(){
-        const { packages, soundFile, currentPlay, overlayShow } = this.state;
+        const { packages, soundFile, currentPlay, overlayShow, isLoading } = this.state;
         return(
             <div>
                 <BottomOverlay message="คัดลอกลิ้งก์แล้ว" show={overlayShow}/>
-                {!soundFile.isLoaded ? <Overlay message={soundFile.error === null ? 'กำลังโหลด': soundFile.error}/>: ''}
+                {isLoading ? <Overlay isLoading={isLoading} message={soundFile.error === null ? 'กำลังโหลด': soundFile.error}/>: ''}
                 <Container>
                     { packages.title !== undefined ?
                     <>

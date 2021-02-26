@@ -2,8 +2,8 @@
     padding-top: 100px;
     height: 450px;
     width: 100%;
-    background-size: 100% 100%;
-    
+    background-size: 110% 130%;
+    background-repeat: no-repeat;
   }
   
   .schedule-title{
