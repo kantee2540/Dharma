@@ -5,10 +5,10 @@ import axios from 'axios'
 import './Sound.css'
 import { baseUrl, resourceUrl } from '../networkVariable'
 import Overlay from '../Component/Overlay'
+import dayjs from 'dayjs'
+import Default from '../Image/default_image.png'
 
 import SoundFile from './SoundFile'
-
-import tawanron from '../Image/tawanron.jpg'
 
 export default class Sound extends React.Component {
 
@@ -17,28 +17,31 @@ export default class Sound extends React.Component {
         this.state = {
             items: [],
             error: null,
-            isLoaded: false
+            isLoading: false
         }
     }
 
     componentDidMount(){
+        this.setState({isLoading: true})
         var url = baseUrl + "/sound";
         axios.get(url)
         .then(response => {
-            this.setState({items: response.data, isLoaded: true});
+            this.setState({items: response.data, isLoading: false});
         }).catch(error => {
-            this.setState({error: error.message});
+            this.setState({error: error.message, isLoading: false});
         });
     }
 
     render(){
-        const { items, error, isLoaded } = this.state;
+        const { items, error, isLoading } = this.state;
         return (
             <BrowserRouter basename="/sound">
                 <div className="content">
                 <Switch>
                     <Route path="/" exact>
-                        {!isLoaded ? <Overlay message={error == null ? "กำลังโหลด": error}/>: ''}
+                        {isLoading || error !== null ?
+                         <Overlay isLoading={isLoading} message={error == null ? "กำลังโหลด": error}/>
+                         : ''}
                         <BaseSound items={items}/>
                     </Route>
                     <Route path="/:id">
@@ -62,7 +65,8 @@ class BaseSound extends React.Component{
                         (
                             <SoundItem key={key} 
                             id={item.id}
-                            img={item.package_image != null ? resourceUrl + "/" + item.sound_package_folder + "/" + item.package_image : tawanron} 
+                            img={item.package_image != null ? resourceUrl + "/" + item.sound_package_folder + "/" + item.package_image : Default}
+                            date={item.created_at} 
                             title={item.sound_package_name}/>
                         ))}
                     </Row>
@@ -73,14 +77,23 @@ class BaseSound extends React.Component{
 }
 
 class SoundItem extends React.Component{
+    formatDate(date){
+        let toDate = new Date(date);
+        let formatted = dayjs(toDate).format("D MMMM BBBB")
+        return formatted
+    }
+
     render(){
         var link = "/"+this.props.id;
         return(
             <Col className="sound-item" xs={12} md={6} lg={4}>
                 <Link className="sound-item-container" to={link}>
-                    <img className="sound-img" src={this.props.img}/>
+                    <img className="sound-img" src={this.props.img} alt="cover"/>
                     <div className="sound-item-detail">
                         <div className="title">{this.props.title}</div>
+                        <div className="date">
+                            <b>วันที่เผยแพร่ :</b> {this.formatDate(this.props.date)}
+                        </div>
                     </div>
                 </Link>
             </Col>

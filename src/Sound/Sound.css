@@ -64,3 +64,21 @@
     text-decoration: none;
     background-color: rgb(213, 234, 255);
 }
+
+#not-found{
+    text-align: center;
+    font-size: 23px;
+    margin-top: 1em;
+}
+
+#not-found .icon{
+    font-size: 60px;
+    color: gray;
+    margin-bottom: 8px;
+}
+
+#not-found .detail{
+    color: gray;
+    font-size: 16px;
+    margin-bottom: 1em;
+}

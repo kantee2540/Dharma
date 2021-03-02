@@ -1,64 +1,52 @@
 import React from 'react'
 import AudioPlayer from "react-h5-audio-player";
 import 'react-h5-audio-player/lib/styles.css';
-import { Container, Row, Col, Table } from 'react-bootstrap'
+import { Container, Row, Col, Table, Button } from 'react-bootstrap'
 import { Link, withRouter } from 'react-router-dom'
 import { baseUrl, resourceUrl } from '../networkVariable'
 import './Sound.css'
 import axios from 'axios'
 import Overlay from '../Component/Overlay'
 import BottomOverlay from '../Component/BottomOverlay'
+import dayjs from 'dayjs'
 
 class SoundFile extends React.Component{
 
     constructor(props){
         super(props);
         this.state = {packages: {title: "", folder: "", error: null},
-        soundFile: {items: [], isLoaded: false, error: null},
+        soundFile: {items: [], error: null},
         currentPlay: {title: "", date: "", key: null},
-        overlayShow: false};
+        overlayShow: false,
+        isLoading: false};
     }
 
     getInfomation(){
-        var url = baseUrl + "/sound";
+        this.setState({isLoading: true})
         const id = this.props.match.params.id;
-
-        axios.get(url, {
-            params: {
-                id: id
-            }
-        })
+        var url = baseUrl + "/sound/"+id;
+        
+        axios.get(url)
         .then(response => {
-            var info = response.data[0];
-            this.setState({packages: 
-                {title: info.sound_package_name,
-                image: info.package_image,
-                folder: info.sound_package_folder}});
+            var info = response.data;
+            this.setState({
+                packages: {
+                    title: info.sound_package_name,
+                    image: info.package_image,
+                    folder: info.sound_package_folder,
+                }
+            });
+            this.setState({
+                soundFile: {items: info.data}
+            })
+            this.setState({isLoading: false})
         }).catch(error => {
-            this.setState({packages: {error: error.message}});
-        });
-    }
-
-    getSoundFile(){
-        var url = baseUrl + "/sound/package";
-        const id = this.props.match.params.id;
-
-        axios.get(url, {
-            params: {
-                id: id
-            }
-        })
-        .then(response => {
-            var datas = response.data;
-            this.setState({soundFile: {items: datas, isLoaded: true}});
-        }).catch(error => {
-            this.setState({soundFile: {error: error.message}});
+            this.setState({packages: {error: error.message}, isLoading: false});
         });
     }
 
     componentDidMount(){
         this.getInfomation();
-        this.getSoundFile();
     }
 
     selectSound(fileName, uploadDate, key){
@@ -85,15 +73,17 @@ class SoundFile extends React.Component{
     }
 
     render(){
-        const { packages, soundFile, currentPlay, overlayShow } = this.state;
+        const { packages, soundFile, currentPlay, overlayShow, isLoading } = this.state;
         return(
             <div>
                 <BottomOverlay message="คัดลอกลิ้งก์แล้ว" show={overlayShow}/>
-                {!soundFile.isLoaded ? <Overlay message={soundFile.error === null ? 'กำลังโหลด': soundFile.error}/>: ''}
+                {isLoading ? <Overlay isLoading={isLoading} message={soundFile.error === null ? 'กำลังโหลด': soundFile.error}/>: ''}
                 <Container>
+                    { packages.title !== undefined ?
+                    <>
                     <div className="head-title">
                         <Link to="/" className="back-link">
-                            <i class="fas fa-arrow-left"></i>
+                            <i className="fas fa-arrow-left"></i>
                         </Link>
                         {packages.title}
                     </div>
@@ -112,13 +102,15 @@ class SoundFile extends React.Component{
                                 {currentPlay.title}
                                 </div>
                                 <div className="upload-date">
-                                    {currentPlay.date}
+                                    {dayjs(currentPlay.date).format("D MMMM BBBB")}
                                 </div>
                             </div>
                             
                                 <div className="download-detail">
                                     <a className="compact-button" 
-                                    href={baseUrl+ "/sound/"+ packages.folder +"/"+currentPlay.title} target="_blank">
+                                    href={resourceUrl+ "/" +packages.folder +"/"+currentPlay.title} 
+                                    target="_blank"
+                                    rel="noopener noreferrer">
                                         <i className="fas fa-file-download"></i>ดาวโหลด 
                                     </a>
                                     <a className="compact-button" href="#" onClick={this.copyLink.bind(this)}>
@@ -149,7 +141,23 @@ class SoundFile extends React.Component{
                         </Col>
                         
                     </Row>
-                    
+                    </> : 
+                    <div id="not-found">
+                        <div className="icon">
+                            <i className="fas fa-question-circle"></i>
+                        </div>
+                        <b>ไม่พบชุดฟังเสียง</b>
+                        <div className="detail">
+                        ชุดไฟล์เสียงนี้ถูกลบแล้วหรือไม่พบเจอ
+                        </div>
+                        <Link to="/">
+                            <Button>
+                                ย้อนกลับ
+                            </Button>
+                        </Link>
+                        
+                    </div>
+                    }
                 </Container>
             </div>
         )

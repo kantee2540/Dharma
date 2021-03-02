@@ -7,9 +7,10 @@
 .sound-item-container{
     display: block;
     overflow: hidden;
-    border: 1px solid lightgray;
     border-radius: 1em;
     color: black;
+    min-height: 370px;
+    box-shadow: 0px 1px 10px 2px rgba(180, 180, 180, 0.5);
 }
 
 .sound-item-container:hover{
@@ -18,14 +19,14 @@
     background-color: rgb(238, 238, 238);
 }
 
-.sound-item-container .sound-img{
-    width: 100%;
-    height: 200px;
-}
-
 .sound-item .title{
     font-size: 16px;
     font-weight: bold;
+}
+
+.sound-item .date{
+    color: gray;
+    margin-top: 0.5em;
 }
 
 .sound-item .icon{
@@ -40,6 +41,12 @@
 
 .sound-item-detail .date, .sound-item-detail .location{
     font-size: 14px;
+}
+
+.sound-item .sound-img{
+    width: 100%;
+    height: 230px;
+    object-fit: cover;
 }
 
 .about .img{
