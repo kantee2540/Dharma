@@ -8,6 +8,7 @@ import './Sound.css'
 import axios from 'axios'
 import Overlay from '../Component/Overlay'
 import BottomOverlay from '../Component/BottomOverlay'
+import dayjs from 'dayjs'
 
 class SoundFile extends React.Component{
 
@@ -101,7 +102,7 @@ class SoundFile extends React.Component{
                                 {currentPlay.title}
                                 </div>
                                 <div className="upload-date">
-                                    {currentPlay.date}
+                                    {dayjs(currentPlay.date).format("D MMMM BBBB")}
                                 </div>
                             </div>
                             

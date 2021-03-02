@@ -6,10 +6,9 @@ import './Sound.css'
 import { baseUrl, resourceUrl } from '../networkVariable'
 import Overlay from '../Component/Overlay'
 import dayjs from 'dayjs'
+import Default from '../Image/default_image.png'
 
 import SoundFile from './SoundFile'
-
-import tawanron from '../Image/tawanron.jpg'
 
 export default class Sound extends React.Component {
 
@@ -66,7 +65,7 @@ class BaseSound extends React.Component{
                         (
                             <SoundItem key={key} 
                             id={item.id}
-                            img={item.package_image != null ? resourceUrl + "/" + item.sound_package_folder + "/" + item.package_image : tawanron}
+                            img={item.package_image != null ? resourceUrl + "/" + item.sound_package_folder + "/" + item.package_image : Default}
                             date={item.created_at} 
                             title={item.sound_package_name}/>
                         ))}
@@ -80,7 +79,7 @@ class BaseSound extends React.Component{
 class SoundItem extends React.Component{
     formatDate(date){
         let toDate = new Date(date);
-        let formatted = dayjs(toDate).format("DD MMMM BBBB")
+        let formatted = dayjs(toDate).format("D MMMM BBBB")
         return formatted
     }
 
