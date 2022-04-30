@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Container } from 'react-bootstrap'
 // import { Link } from 'react-router-dom'
 import { baseUrl } from '../networkVariable'
-import tawanron from '../Image/tawanron.jpg'
+// import tawanron from '../Image/tawanron.jpg'
 import axios from 'axios'
 import './Cover.css'
 

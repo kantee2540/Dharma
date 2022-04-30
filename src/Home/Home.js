@@ -9,7 +9,7 @@ import Overlay from '../Component/Overlay'
 import dayjs from 'dayjs'
 
 import Default from '../Image/default_image.png'
-import tawanron from '../Image/tawanron.jpg'
+// import tawanron from '../Image/tawanron.jpg'
 import youtube_channel from '../Image/youtube_channel.jpg'
 
 export default class Home extends React.Component {
@@ -106,23 +106,23 @@ class SoundItem extends React.Component{
     }
 }
 
-class VideoItem extends React.Component{
+// class VideoItem extends React.Component{
 
-    constructor(props){
-        super(props);
-        var src = props.src;
-        var youtubeCode = src.substring(src.length - 11, src.length);
-        this.state = { code: youtubeCode };
-    }
+//     constructor(props){
+//         super(props);
+//         var src = props.src;
+//         var youtubeCode = src.substring(src.length - 11, src.length);
+//         this.state = { code: youtubeCode };
+//     }
 
-    render(){
-        const { code } = this.state;
-        var embedUrl = "https://www.youtube.com/embed/" + code;
+//     render(){
+//         const { code } = this.state;
+//         var embedUrl = "https://www.youtube.com/embed/" + code;
 
-        return(
-            <Col xs={12} md={6}>
-                <iframe width="100%" height="315" src={embedUrl} frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </Col>
-        )
-    }
-}
+//         return(
+//             <Col xs={12} md={6}>
+//                 <iframe width="100%" height="315" src={embedUrl} frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+//             </Col>
+//         )
+//     }
+// }

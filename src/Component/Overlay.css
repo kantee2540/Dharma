@@ -9,7 +9,7 @@
 
 .overlay-content{
     font-size: 20px;
-    background-color: lightgray;
+    background-color: rgba(238, 238, 238, 0.7);
     position: absolute;
     display: flex;
     border-radius: 1em;

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Tabs, Tab, Row, Col } from 'react-bootstrap'
+import { Container, Tabs, Tab } from 'react-bootstrap'
 import './Schedule.css'
 
 export default function Schedule() {

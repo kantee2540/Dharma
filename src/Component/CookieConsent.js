@@ -1,4 +1,4 @@
-import { faCookie, faCookieBite } from '@fortawesome/free-solid-svg-icons'
+import { faCookieBite } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 import { Button, Container, Row, Col } from 'react-bootstrap'
