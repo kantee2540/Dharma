@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useState } from 'react'
 import "./CompactButton.css"
 
-function CompactButton({ title, icon, onClick, hoverColor }) {
+function CompactButton({ title, icon, rightIcon, onClick, hoverColor }) {
   const [hover, setHover] = useState(false)
 
   return (
@@ -15,12 +15,21 @@ function CompactButton({ title, icon, onClick, hoverColor }) {
       color: hover ? hoverColor: 'black'
     }}
     >
+      { icon ?
 			<div className='icon'>
         <FontAwesomeIcon icon={icon}/>
       </div>
+      : null
+      }
       <div className='title'>
         {title}
       </div>
+      { rightIcon ?
+      <div className='icon'>
+        <FontAwesomeIcon icon={rightIcon}/>
+      </div>
+      : null
+      }
 		</div>
   )
 }

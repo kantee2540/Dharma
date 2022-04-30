@@ -11,6 +11,8 @@ import dayjs from 'dayjs'
 import Default from '../Image/default_image.png'
 // import tawanron from '../Image/tawanron.jpg'
 import youtube_channel from '../Image/youtube_channel.jpg'
+import NavButton from '../Component/NavButton'
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 
 export default class Home extends React.Component {
 
@@ -49,7 +51,11 @@ export default class Home extends React.Component {
                 <Container style={{ marginTop: 20}}>
                     <div className="head-title d-flex justify-content-between">
                         <div>ฟังย้อนหลัง</div>
-                        <Link to="/sound" className="compact-button">เพิ่มเติม <i className="fas fa-arrow-right"></i></Link>
+                        <NavButton
+                        to={"/sound"}
+                        title="เพิ่มเติม"
+                        rightIcon={faArrowRight}
+                        />
                     </div>
                     <Row>
                         {items.map((item, key) => 
