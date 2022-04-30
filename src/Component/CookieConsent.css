@@ -7,7 +7,7 @@
 #cookie-consent{
     position: fixed;
     bottom: 0;
-    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.95);
     width: 100%;
     padding: 1em;
     border-top: 1px solid lightgray;

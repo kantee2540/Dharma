@@ -17,8 +17,13 @@ class SoundFile extends React.Component{
 
     constructor(props){
         super(props);
+        const autoPlay = 
+        localStorage.getItem('autoplay') !== null ? 
+        (localStorage.getItem('autoplay') === 'true' ? true: false)
+        : true
+        console.log(autoPlay)
         this.state = {
-            autoPlay: true,
+            autoPlay: autoPlay,
             currentTrackIndex: null,
             packages: {title: "", folder: "", error: null},
             soundFile: {items: [], error: null},
@@ -65,17 +70,21 @@ class SoundFile extends React.Component{
     }
 
     onPreviousTrack = () => {
-        this.setState({ currentTrackIndex: this.state.currentTrackIndex - 1 }, ()=>{
-            const data = this.state.soundFile.items[this.state.currentTrackIndex]
-            this.selectSound(data.sound_file, data.created_at, this.state.currentTrackIndex)
-        })
+        if(this.state.currentTrackIndex > 0){
+            this.setState({ currentTrackIndex: this.state.currentTrackIndex - 1 }, ()=>{
+                const data = this.state.soundFile.items[this.state.currentTrackIndex]
+                this.selectSound(data.sound_file, data.created_at, this.state.currentTrackIndex)
+            })
+        }
     }
 
     onNextTrack = () => {
-        this.setState({ currentTrackIndex: this.state.currentTrackIndex + 1 }, ()=>{
-            const data = this.state.soundFile.items[this.state.currentTrackIndex]
-            this.selectSound(data.sound_file, data.created_at, this.state.currentTrackIndex)
-        })
+        if(this.state.currentTrackIndex !== this.state.soundFile.items.length - 1){
+            this.setState({ currentTrackIndex: this.state.currentTrackIndex + 1 }, ()=>{
+                const data = this.state.soundFile.items[this.state.currentTrackIndex]
+                this.selectSound(data.sound_file, data.created_at, this.state.currentTrackIndex)
+            })
+        }
     }
 
     onEnded = () => {
@@ -107,6 +116,13 @@ class SoundFile extends React.Component{
         console.log(currentURL);
 
         event.preventDefault();
+    }
+
+    onAutoplayChange = () => {
+        const autoPlay = !this.state.autoPlay ? true:false
+        this.setState({ autoPlay: autoPlay }, ()=>{
+            localStorage.setItem('autoplay', autoPlay ? 'true':'false')
+        })
     }
 
     render(){
@@ -175,7 +191,7 @@ class SoundFile extends React.Component{
                                 <div style={{ marginRight: 13 }}>เล่นอัตโนมัติ</div>
                                 <Toggle 
                                 isTurnon={this.state.autoPlay}
-                                onChange={()=>this.setState({ autoPlay: !this.state.autoPlay ? true:false })}/>
+                                onChange={()=>this.onAutoplayChange()}/>
                             </div>
                             <Table bordered hover>
                             <thead>
