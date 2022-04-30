@@ -73,3 +73,17 @@
     justify-content: flex-end;
     margin-bottom: 6px;
 }
+
+.no-sound{
+    text-align: center;
+}
+
+.no-sound .icon{
+    font-size: 45px;
+    color: gray;
+}
+
+.no-sound .title{
+    font-size: 25px;
+    font-weight: bold;
+}
