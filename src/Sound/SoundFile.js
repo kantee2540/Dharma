@@ -9,16 +9,28 @@ import axios from 'axios'
 import Overlay from '../Component/Overlay'
 import BottomOverlay from '../Component/BottomOverlay'
 import dayjs from 'dayjs'
+import CompactButton from '../Component/CompactButton';
+import { faCopy, faFileDownload } from '@fortawesome/free-solid-svg-icons';
+import Toggle from '../Component/Toggle';
 
 class SoundFile extends React.Component{
 
     constructor(props){
         super(props);
-        this.state = {packages: {title: "", folder: "", error: null},
-        soundFile: {items: [], error: null},
-        currentPlay: {title: "", date: "", key: null},
-        overlayShow: false,
-        isLoading: false};
+        const autoPlay = 
+        localStorage.getItem('autoplay') !== null ? 
+        (localStorage.getItem('autoplay') === 'true' ? true: false)
+        : true
+        console.log(autoPlay)
+        this.state = {
+            autoPlay: autoPlay,
+            currentTrackIndex: null,
+            packages: {title: "", folder: "", error: null},
+            soundFile: {items: [], error: null},
+            currentPlay: {title: "", date: "", key: null},
+            overlayShow: false,
+            isLoading: false
+        };
     }
 
     getInfomation(){
@@ -51,7 +63,41 @@ class SoundFile extends React.Component{
 
     selectSound(fileName, uploadDate, key){
         window.scrollTo(0, 0);
-        this.setState({currentPlay: {title: fileName, date: uploadDate, key: key}});
+        this.setState({
+            currentTrackIndex: key,
+            currentPlay: {title: fileName, date: uploadDate, key: key}
+        });
+    }
+
+    onPreviousTrack = () => {
+        if(this.state.currentTrackIndex > 0){
+            this.setState({ currentTrackIndex: this.state.currentTrackIndex - 1 }, ()=>{
+                const data = this.state.soundFile.items[this.state.currentTrackIndex]
+                this.selectSound(data.sound_file, data.created_at, this.state.currentTrackIndex)
+            })
+        }
+    }
+
+    onNextTrack = () => {
+        if(this.state.currentTrackIndex !== this.state.soundFile.items.length - 1){
+            this.setState({ currentTrackIndex: this.state.currentTrackIndex + 1 }, ()=>{
+                const data = this.state.soundFile.items[this.state.currentTrackIndex]
+                this.selectSound(data.sound_file, data.created_at, this.state.currentTrackIndex)
+            })
+        }
+    }
+
+    onEnded = () => {
+        if(this.state.autoPlay && this.state.currentTrackIndex !== this.state.soundFile.items.length - 1){
+            this.setState({ currentTrackIndex: this.state.currentTrackIndex + 1 }, ()=>{
+                const data = this.state.soundFile.items[this.state.currentTrackIndex]
+                this.selectSound(data.sound_file, data.created_at, this.state.currentTrackIndex)
+            })
+        }
+    }
+
+    onDownload = (link) => {
+        window.open(link, '_blank')
     }
 
     copyLink(event){
@@ -70,6 +116,13 @@ class SoundFile extends React.Component{
         console.log(currentURL);
 
         event.preventDefault();
+    }
+
+    onAutoplayChange = () => {
+        const autoPlay = !this.state.autoPlay ? true:false
+        this.setState({ autoPlay: autoPlay }, ()=>{
+            localStorage.setItem('autoplay', autoPlay ? 'true':'false')
+        })
     }
 
     render(){
@@ -94,8 +147,12 @@ class SoundFile extends React.Component{
                             <img src={resourceUrl+ "/"+ packages.folder +"/"+packages.image} alt="coverimage" className="cover-image-package"/>
                             <AudioPlayer 
                                 autoPlay={true}
-                                showJumpControls={false}
                                 loop={false}
+                                showSkipControls={true}
+                                showJumpControls={false}
+                                onClickNext={()=>this.onNextTrack()}
+                                onClickPrevious={()=>this.onPreviousTrack()}
+                                onEnded={()=>this.onEnded()}
                                 src={resourceUrl+ "/"+ packages.folder +"/"+currentPlay.title}/>
                             <div className="play-info">
                                 <div className="play-title">
@@ -107,20 +164,35 @@ class SoundFile extends React.Component{
                             </div>
                             
                                 <div className="download-detail">
-                                    <a className="compact-button" 
-                                    href={resourceUrl+ "/" +packages.folder +"/"+currentPlay.title} 
-                                    target="_blank"
-                                    rel="noopener noreferrer">
-                                        <i className="fas fa-file-download"></i>ดาวโหลด 
-                                    </a>
-                                    <a className="compact-button" href="#" onClick={this.copyLink.bind(this)}>
-                                        <i className="fas fa-copy"></i>คัดลอกลิ้งก์ 
-                                    </a>
+                                    <Row>
+                                        <Col md="6" lg="4">
+                                            <CompactButton 
+                                            title="ดาวโหลด" 
+                                            icon={faFileDownload} 
+                                            hoverColor="#28B463"
+                                            onClick={()=>this.onDownload(`${resourceUrl}/${packages.folder}/${currentPlay.title}`)}/>
+                                        </Col>
+                                        <Col md="6" lg="4">
+                                            <CompactButton 
+                                            title="คัดลอกลิ้งก์" 
+                                            icon={faCopy} 
+                                            hoverColor="dodgerblue"
+                                            onClick={this.copyLink.bind(this)}/>
+                                        </Col>
+                                    </Row>
+                                    
+                                    
                                 </div>
                             </>
                                 : <NoItemSelect/>}
                         </Col>
                         <Col md={6}>
+                            <div className='autoplay'>
+                                <div style={{ marginRight: 13 }}>เล่นอัตโนมัติ</div>
+                                <Toggle 
+                                isTurnon={this.state.autoPlay}
+                                onChange={()=>this.onAutoplayChange()}/>
+                            </div>
                             <Table bordered hover>
                             <thead>
                                 <tr>
@@ -142,21 +214,7 @@ class SoundFile extends React.Component{
                         
                     </Row>
                     </> : 
-                    <div id="not-found">
-                        <div className="icon">
-                            <i className="fas fa-question-circle"></i>
-                        </div>
-                        <b>ไม่พบชุดฟังเสียง</b>
-                        <div className="detail">
-                        ชุดไฟล์เสียงนี้ถูกลบแล้วหรือไม่พบเจอ
-                        </div>
-                        <Link to="/">
-                            <Button>
-                                ย้อนกลับ
-                            </Button>
-                        </Link>
-                        
-                    </div>
+                    <NotFound/>
                     }
                 </Container>
             </div>
@@ -165,6 +223,26 @@ class SoundFile extends React.Component{
 }
 
 export default withRouter(SoundFile)
+
+function NotFound(){
+    return (
+        <div id="not-found">
+            <div className="icon">
+                <i className="fas fa-question-circle"></i>
+            </div>
+            <b>ไม่พบชุดฟังเสียง</b>
+            <div className="detail">
+            ชุดไฟล์เสียงนี้ถูกลบแล้วหรือไม่พบเจอ
+            </div>
+            <Link to="/">
+                <Button>
+                    ย้อนกลับ
+                </Button>
+            </Link>
+            
+        </div>
+    )
+}
 
 function NoItemSelect(){
     return(

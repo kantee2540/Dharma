@@ -1,0 +1,31 @@
+@media(max-width: 768px){
+    #cookie-consent .accept-button{
+        margin-top: 20px;
+    }
+}
+
+#cookie-consent{
+    position: fixed;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.95);
+    width: 100%;
+    padding: 1em;
+    border-top: 1px solid lightgray;
+}
+
+#cookie-consent .title{
+    font-size: 18px;
+}
+
+#cookie-consent .icon{
+    font-size: 30px;
+    margin-right: 16px;
+}
+
+#cookie-consent .accept-button{
+    width: 100%;
+}
+
+#cookie-consent .col-content{
+    display: flex;
+}

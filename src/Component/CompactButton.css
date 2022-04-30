@@ -1,0 +1,17 @@
+.compact-button{
+    font-size: 18px;
+    padding: 13px 13px;
+    border-radius: 0.5em;
+    color: black;
+    cursor: pointer;
+    display: flex;
+}
+
+.compact-button:hover{
+    text-decoration: none;
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.compact-button .title{
+    margin-left: 13px;
+}
