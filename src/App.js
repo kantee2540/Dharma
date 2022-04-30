@@ -12,21 +12,41 @@ import Schedule from './Schedule/Schedule'
 import Sound from './Sound/Sound'
 import Video from './Video/Video'
 import About from './About/About'
+import CookieConsent from './Component/CookieConsent';
 
 export default class App extends React.Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      cookieAccepted: localStorage.getItem('cookie-accept') === 'true' ? true: false
+    }
+    this.onAcceptCookie.bind(this)
+  }
+  
 
   componentDidMount(){
     dayjs.extend(buddhistEra);
     dayjs.locale('th');
   }
 
+  onAcceptCookie = () => {
+    localStorage.setItem('cookie-accept', 'true')
+    this.setState({ cookieAccepted: true })
+  }
+
   render(){
     return (
-      <BrowserRouter>
-      <div className="App">
-        <UserStack/>
+      <div>
+        <BrowserRouter>
+        <div className="App">
+          <UserStack/>
+        </div>
+        </BrowserRouter>
+        <CookieConsent
+        isAccepted={this.state.cookieAccepted}
+        onAccept={this.onAcceptCookie}
+        />
       </div>
-      </BrowserRouter>
     );
   }
 }
