@@ -165,14 +165,14 @@ class SoundFile extends React.Component{
                             
                                 <div className="download-detail">
                                     <Row>
-                                        <Col md="6" lg="4">
+                                        <Col sm="6" xl="4">
                                             <CompactButton 
                                             title="ดาวโหลด" 
                                             icon={faFileDownload} 
                                             hoverColor="#28B463"
                                             onClick={()=>this.onDownload(`${resourceUrl}/${packages.folder}/${currentPlay.title}`)}/>
                                         </Col>
-                                        <Col md="6" lg="4">
+                                        <Col sm="6" xl="4">
                                             <CompactButton 
                                             title="คัดลอกลิ้งก์" 
                                             icon={faCopy} 
