@@ -73,6 +73,7 @@ function UserStack(){
         <About/>
       </Route>
     </Switch>
+    <hr style={{ marginTop: 40, marginBottom: 0 }}/>
     <Footer/>
     </BrowserRouter>
     </>
