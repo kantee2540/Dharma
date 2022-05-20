@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Container } from 'react-bootstrap'
 // import { Link } from 'react-router-dom'
-import { baseUrl } from '../networkVariable'
+import { baseUrl, resourceUrl } from '../networkVariable'
 // import tawanron from '../Image/tawanron.jpg'
 import axios from 'axios'
 import './Cover.css'
@@ -26,7 +26,7 @@ export default function Cover() {
   }
 
   return (
-      <div className="cover-image" style={{backgroundImage: `url(${cover})`}}>
+      <div className="cover-image" style={{backgroundImage: cover ? `url('${resourceUrl}${cover}')`: ''}}>
           <Container>
           {/* <Row>
             <Col md={6} lg={7} xl={7}></Col>
@@ -51,6 +51,6 @@ export default function Cover() {
             </Col>
           </Row> */}
           </Container>
-        </div>
+      </div>
   )
 }
