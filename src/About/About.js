@@ -3,6 +3,7 @@ import { Container } from 'react-bootstrap'
 import { baseUrl } from '../networkVariable'
 import axios from 'axios'
 import Overlay from '../Component/Overlay'
+import parse from 'html-react-parser'
 
 export default function About() {
     const [isLoading, setLoading] = useState(false);
@@ -36,7 +37,7 @@ export default function About() {
             <Container>
                 <div className="head-title">{item.about_title}</div>
                 <div>
-                    {item.about_content}
+                    {parse(item.about_content)}
                 </div>
             </Container>
         </div>

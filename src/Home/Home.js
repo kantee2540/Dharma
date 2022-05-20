@@ -95,7 +95,6 @@ class SoundItem extends React.Component{
 
     render(){
         var link = "/sound/"+this.props.id;
-        console.log(this.props.date)
         return(
             <Col className="sound-item" xs={12} md={6} lg={4}>
                 <Link className="sound-item-container" to={link}>
