@@ -2,6 +2,7 @@ import React from 'react'
 import { NavLink, Link } from 'react-router-dom'
 import './Menu.css'
 import logo from '../Image/logo.png'
+import Footer from './Footer'
 
 const menuList = [
     {title: "หน้าแรก", to: "/"},
@@ -92,11 +93,8 @@ const Sidebar = (props) =>{
                     to={item.to}
                     onClick={()=>props.clickListCallback()}/>
                 )}
-                <hr/>
-                <div className="footer-menu">
-                สงวนลิขสิทธิ์ 2564<br/>
-                ปฏิบัติธรรมตามพระไตรปิฏก
-                </div>
+                <hr style={{ margin: 0 }}/>
+                <Footer/>
             </div>
         </div>
     )
