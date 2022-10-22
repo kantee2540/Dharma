@@ -21,22 +21,22 @@ class SoundFile extends React.Component{
         localStorage.getItem('autoplay') !== null ? 
         (localStorage.getItem('autoplay') === 'true' ? true: false)
         : true
-        console.log(autoPlay)
         this.state = {
+            soundId: this.props.match.params.id,
             autoPlay: autoPlay,
             currentTrackIndex: null,
             packages: {title: "", folder: "", error: null},
             soundFile: {items: [], error: null},
             currentPlay: {title: "", date: "", key: null},
             overlayShow: false,
+            overlayMessage: "",
             isLoading: false
         };
     }
 
     getInfomation(){
         this.setState({isLoading: true})
-        const id = this.props.match.params.id;
-        var url = baseUrl + "/sound/"+id;
+        var url = `${baseUrl}/sound/${this.state.soundId}`;
         
         axios.get(url)
         .then(response => {
@@ -100,6 +100,20 @@ class SoundFile extends React.Component{
         window.open(link, '_blank')
     }
 
+    onDownloadAll = () => {
+        const url = `${baseUrl}/sound/${this.state.soundId}/multi-download`
+        this.setState({ isLoading: true })
+        axios.get(url)
+        .then(response => {
+            const data = response.data
+            window.open(`${baseUrl}${data.download_path}`)
+            this.setState({ isLoading: false })
+        }) 
+        .catch(error => {
+            console.error(error)
+        })
+    }
+
     copyLink(event){
         let currentURL = window.location.href;
         var dummy = document.createElement('input');
@@ -109,10 +123,10 @@ class SoundFile extends React.Component{
         document.execCommand("copy");
         document.body.removeChild(dummy);
 
-        this.setState({overlayShow: true});
+        this.setState({overlayShow: true, overlayMessage: "คัดลอกลิ้งก์แล้ว"});
         setTimeout(()=>{
             this.setState({overlayShow: false});
-        }, 1500);
+        }, 3000);
         console.log(currentURL);
 
         event.preventDefault();
@@ -126,10 +140,10 @@ class SoundFile extends React.Component{
     }
 
     render(){
-        const { packages, soundFile, currentPlay, overlayShow, isLoading } = this.state;
+        const { packages, soundFile, currentPlay, overlayShow, isLoading, overlayMessage } = this.state;
         return(
             <div>
-                <BottomOverlay message="คัดลอกลิ้งก์แล้ว" show={overlayShow}/>
+                <BottomOverlay message={overlayMessage} show={overlayShow}/>
                 {isLoading ? <Overlay isLoading={isLoading} message={soundFile.error === null ? 'กำลังโหลด': soundFile.error}/>: ''}
                 <Container>
                     { packages.title !== undefined ?
@@ -187,11 +201,20 @@ class SoundFile extends React.Component{
                                 : <NoItemSelect/>}
                         </Col>
                         <Col md={6}>
-                            <div className='autoplay'>
-                                <div style={{ marginRight: 13 }}>เล่นอัตโนมัติ</div>
-                                <Toggle 
-                                isTurnon={this.state.autoPlay}
-                                onChange={()=>this.onAutoplayChange()}/>
+                            <div className='top-playlist-header'>
+                                <CompactButton
+                                    icon={faFileDownload}
+                                    title={"ดาวโหลดทั้งหมด"}
+                                    fontSize={16}
+                                    verticalPadding={10}
+                                    onClick={()=>this.onDownloadAll()}
+                                />
+                                <div className='autoplay'>
+                                    <div style={{ marginRight: 13 }}>เล่นอัตโนมัติ</div>
+                                    <Toggle 
+                                    isTurnon={this.state.autoPlay}
+                                    onChange={()=>this.onAutoplayChange()}/>
+                                </div>
                             </div>
                             <Table bordered hover>
                             <thead>
