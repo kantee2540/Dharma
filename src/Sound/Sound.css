@@ -71,7 +71,13 @@
 .autoplay{
     display: flex;
     justify-content: flex-end;
-    margin-bottom: 6px;
+}
+
+.top-playlist-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
 }
 
 .no-sound{
