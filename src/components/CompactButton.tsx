@@ -8,7 +8,7 @@ type CompactButtonProps = {
   icon: IconProp;
   rightIcon?: IconProp;
   onClick: () => void;
-  hoverColor: string;
+  hoverColor?: string;
   justifyContent?: string;
   fontSize?: number;
   verticalPadding?: number;

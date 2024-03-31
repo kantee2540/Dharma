@@ -89,7 +89,7 @@ function Sound() {
             icon={faArrowAltCircleDown}
             title="โหลดเพิ่มเติม"
             justifyContent="center"
-            hoverColor="dodgerblue"
+            hoverColor="#c98a00"
             onClick={() => onNextPage()}
           />
         ) : null}
