@@ -1,0 +1,49 @@
+.cover-image {
+  padding-top: 100px;
+  height: 450px;
+  width: 100%;
+  background-size: 100%;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.schedule-title {
+  margin-bottom: 1.5em;
+}
+
+.schedule-block {
+  background-color: white;
+  padding: 23px;
+  border-radius: 10px;
+  height: 300px;
+}
+
+.schedule-block b {
+  font-size: 20px;
+}
+
+.next-up {
+  background-color: #ffe08d;
+  padding: 10px;
+  margin-bottom: 1em;
+  border-radius: 0.5em;
+}
+
+.comming-up {
+  background-color: rgb(221, 221, 221);
+  border-radius: 0.5em;
+  padding: 10px;
+}
+
+.event-title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.event-date {
+  font-size: 12px;
+}
+
+.event-location {
+  font-size: 12px;
+}
