@@ -1,34 +1,36 @@
-import React, { useEffect, useState } from 'react'
-import { Container } from 'react-bootstrap'
+import React, { useEffect, useState } from "react";
+import { Container } from "react-bootstrap";
 // import { Link } from 'react-router-dom'
-import { baseUrl, resourceUrl } from '../networkVariable'
+import { baseUrl, resourceUrl } from "../networkVariable";
 // import tawanron from '../Image/tawanron.jpg'
-import axios from 'axios'
-import './Cover.css'
+import axios from "axios";
+import "./Cover.css";
 
 export default function Cover() {
-  const [cover, setCover] = useState('');
-  useEffect(()=>{
-    fetchData()
-  })
+  const [cover, setCover] = useState("");
+  useEffect(() => {
+    fetchData();
+  });
 
-  const fetchData = () =>{
-    let url = baseUrl + "/home/cover"
+  const fetchData = () => {
+    let url = baseUrl + "/home/cover";
     axios({
-      url: url
+      url: url,
     })
-    .then((response)=>{
-      let data = response.data.cover
-      setCover(data);
-    })
-    .catch((error)=>{
-    })
-  }
+      .then((response) => {
+        let data = response.data.cover;
+        setCover(data);
+      })
+      .catch((error) => {});
+  };
 
   return (
-      <div className="cover-image" style={{backgroundImage: cover ? `url('${resourceUrl}${cover}')`: ''}}>
-          <Container>
-          {/* <Row>
+    <div
+      className="cover-image"
+      style={{ backgroundImage: cover ? `url('${resourceUrl}${cover}')` : "" }}
+    >
+      <Container>
+        {/* <Row>
             <Col md={6} lg={7} xl={7}></Col>
             <Col xs={12} md={6} lg={5}>
               <div className="schedule-block">
@@ -50,7 +52,7 @@ export default function Cover() {
               </div>
             </Col>
           </Row> */}
-          </Container>
-      </div>
-  )
+      </Container>
+    </div>
+  );
 }
