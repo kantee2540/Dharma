@@ -3,17 +3,18 @@
   "version": "1.1.0",
   "private": true,
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^6.5.1",
-    "@fortawesome/free-solid-svg-icons": "^6.5.1",
+    "@fortawesome/fontawesome-svg-core": "^6.5.2",
+    "@fortawesome/free-solid-svg-icons": "^6.5.2",
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@fullcalendar/daygrid": "^6.1.11",
     "@fullcalendar/react": "^6.1.11",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^14.2.2",
+    "@testing-library/jest-dom": "^6.4.2",
+    "@testing-library/react": "^15.0.2",
     "@testing-library/user-event": "^14.5.2",
     "@types/jest": "^29.5.12",
-    "@types/node": "^20.12.2",
-    "@types/react-dom": "^18.2.23",
+    "@types/node": "^20.12.7",
+    "@types/react-dom": "^18.2.25",
+    "@vitejs/plugin-react-swc": "^3.6.0",
     "axios": "^1.6.8",
     "bootstrap": "^5.3.3",
     "dayjs": "^1.11.10",
@@ -24,18 +25,23 @@
     "react-dom": "^18.2.0",
     "react-h5-audio-player": "^3.9.1",
     "react-router-dom": "^6.22.3",
-    "react-scripts": "^5.0.1"
+    "vite": "^5.2.10",
+    "vite-plugin-svgr": "^4.2.0",
+    "vite-tsconfig-paths": "^4.3.2"
   },
   "devDependencies": {
     "@types/react": "^18.2.73",
+    "@vitejs/plugin-react": "^4.2.1",
+    "@vitest/coverage-v8": "^1.5.0",
+    "jsdom": "^24.0.0",
     "react-error-overlay": "6.0.9",
-    "typescript": "^5.4.3"
+    "typescript": "^5.4.3",
+    "vitest": "^1.5.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "vite",
+    "build": "tsc && vite build",
+    "serve": "vite preview"
   },
   "eslintConfig": {
     "extends": [
