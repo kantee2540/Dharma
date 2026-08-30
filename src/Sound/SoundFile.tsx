@@ -92,20 +92,27 @@ function SoundFile() {
   };
 
   const onPreviousTrack = () => {
-    if (currentTrackIndex > 0) {
-      setCurrentTrackIndex((prev) => prev - 1);
+    if (currentTrackIndex !== null && currentTrackIndex > 0) {
+      setCurrentTrackIndex(currentTrackIndex - 1);
     }
   };
 
   const onNextTrack = () => {
-    if (currentTrackIndex !== soundFileItems.length - 1) {
-      setCurrentTrackIndex((prev) => prev + 1);
+    if (
+      currentTrackIndex !== null &&
+      currentTrackIndex !== soundFileItems.length - 1
+    ) {
+      setCurrentTrackIndex(currentTrackIndex + 1);
     }
   };
 
   const onEnded = () => {
-    if (autoPlay && currentTrackIndex !== soundFileItems.length - 1) {
-      setCurrentTrackIndex((prev) => prev + 1);
+    if (
+      autoPlay &&
+      currentTrackIndex !== null &&
+      currentTrackIndex !== soundFileItems.length - 1
+    ) {
+      setCurrentTrackIndex(currentTrackIndex + 1);
     }
   };
 
@@ -128,7 +135,7 @@ function SoundFile() {
       });
   };
 
-  const copyLink = (event) => {
+  const copyLink = () => {
     let currentURL = window.location.href;
     var dummy = document.createElement("input");
     document.body.appendChild(dummy);
@@ -142,9 +149,6 @@ function SoundFile() {
     setTimeout(() => {
       setIsOverlayShow(false);
     }, 3000);
-    console.log(currentURL);
-
-    event.preventDefault();
   };
 
   const onAutoplayChange = () => {
@@ -226,7 +230,7 @@ function SoundFile() {
                             title="คัดลอกลิ้งก์"
                             icon={faCopy}
                             hoverColor="dodgerblue"
-                            onClick={copyLink.bind(this)}
+                            onClick={copyLink}
                           />
                         </Col>
                       </Row>
