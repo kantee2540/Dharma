@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import { FirebaseOptions, initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+import { getAnalytics, logEvent } from "firebase/analytics";
 
 import Menu from "./components/Menu";
 import Footer from "./components/Footer";
@@ -61,6 +61,16 @@ export default function App() {
 }
 
 function UserStack() {
+  const location = useLocation();
+
+  useEffect(() => {
+    logEvent(analytics, "page_view", {
+      page_path: location.pathname + location.search,
+      page_location: window.location.href,
+      page_title: document.title,
+    });
+  }, [location]);
+
   return (
     <>
       <Menu />
