@@ -6,7 +6,7 @@ export default function Footer() {
     <div className="footer">
       <b>ปฏิบัติธรรมตามพระไตรปิฎก</b>
       <br />
-      สงวนลิขสิทธิ์ 2567
+      สงวนลิขสิทธิ์ 2569
     </div>
   );
 }
