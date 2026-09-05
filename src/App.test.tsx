@@ -5,7 +5,10 @@ import App from "./App";
 // Analytics needs a real browser measurement context, so stub the SDK surface
 // App touches at module load.
 vi.mock("firebase/app", () => ({ initializeApp: () => ({}) }));
-vi.mock("firebase/analytics", () => ({ getAnalytics: () => ({}) }));
+vi.mock("firebase/analytics", () => ({
+  getAnalytics: () => ({}),
+  logEvent: () => {},
+}));
 
 test("mounts the app shell under the router", async () => {
   render(<App />);
