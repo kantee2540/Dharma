@@ -24,10 +24,10 @@ function SoundFile() {
       ? localStorage.getItem("autoplay") === "true"
         ? true
         : false
-      : true
+      : true,
   );
   const [currentTrackIndex, setCurrentTrackIndex] = useState<number | null>(
-    null
+    null,
   );
   const [packages, setPackages] = useState<packages | null>(null);
   const [currentPlay, setCurrentPlay] = useState<currentPlay | null>(null);
@@ -215,12 +215,12 @@ function SoundFile() {
                       <Row>
                         <Col sm="6" xl="4">
                           <CompactButton
-                            title="ดาวโหลด"
+                            title="ดาวน์โหลด"
                             icon={faFileDownload}
                             hoverColor="#28B463"
                             onClick={() =>
                               onDownload(
-                                `${resourceUrl}/${packages.folder}/${currentPlay?.title}`
+                                `${resourceUrl}/${packages.folder}/${currentPlay?.title}`,
                               )
                             }
                           />
@@ -244,7 +244,7 @@ function SoundFile() {
                 <div className="top-playlist-header">
                   <CompactButton
                     icon={faFileDownload}
-                    title={"ดาวโหลดทั้งหมด"}
+                    title={"ดาวน์โหลดทั้งหมด"}
                     fontSize={16}
                     verticalPadding={10}
                     onClick={() => onDownloadAll()}
